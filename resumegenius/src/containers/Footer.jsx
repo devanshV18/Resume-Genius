@@ -16,9 +16,9 @@ const Footer = () => {
 
       <div className='flex items-center justify-center gap-6'>
 
-        <Link to={"/"} className='text-violet-600 text-sm text-2xl'>Home</Link>
-        <Link to={"/"} className='text-violet-600 text-sm text-2xl'>Contact</Link>
-        <Link to={"/"} className='text-violet-600 text-sm whitespace-nowrap text-2xl'>Privacy Policy</Link>
+        <Link to={"/"} className='text-violet-600 text-sm text-xl'>Home</Link>
+        <Link to={"/"} className='text-violet-600 text-sm text-xl'>Contact</Link>
+        <Link to={"/"} className='text-violet-600 text-sm whitespace-nowrap text-xl'>Privacy Policy</Link>
 
      </div>
     </div>
