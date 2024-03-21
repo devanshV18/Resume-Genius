@@ -5,7 +5,11 @@ import {AuthButtonWithProvider} from '../components'
 import {FaGoogle, FaGithub} from "react-icons/fa6"
 
 
+
 const Authentication = () => {
+
+
+
   return (
     <div className='auth-section'>
       {/* top section */}
@@ -26,6 +30,8 @@ const Authentication = () => {
 
 
       </div>
+
+      
 
       {/* footer */}
       <Footer/>
