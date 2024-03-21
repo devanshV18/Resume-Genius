@@ -14,13 +14,13 @@ const AuthButtonWithProvider = ({Icon, label, provider}) => {
             case "GoogleAuthProvider" :
                 await signInWithRedirect(auth, googleAuthProvider).then((result) => {
                     console.log(result)
-                }).catch(err=>{
+                }).catch(err => {
                     console.log(`Error : ${err.Message}`)
                 })
                 break
 
             case "GitHubAuthProvider" :
-                console.log("Inside GitHub Auth")
+                console.log("github")
                 break
 
             default:
