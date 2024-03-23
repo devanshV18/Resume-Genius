@@ -3,12 +3,23 @@ import {Logo} from "../assets"
 import { Footer } from '../containers'
 import {AuthButtonWithProvider} from '../components'
 import {FaGoogle, FaGithub} from "react-icons/fa6"
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import useUser from '../hooks/useUser'
 
 
 
 const Authentication = () => {
 
+  const {data, isLoading, isError} = useUser()
 
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(!isLoading && data){
+      navigate("/",{replace:true})
+    }
+  },[isLoading, data])
 
   return (
     <div className='auth-section'>

@@ -1,10 +1,11 @@
 import { onSnapshot } from "firebase/firestore"
+import { auth } from "../config/firebase.config"
 
 export const getUserDetail = () => {
     return new Promise((resolve,reject) => {
         const unsubscribe = auth.onAuthStateChanged((userCred) => {
             if(userCred) {
-                const userData = userCred.provideData[0]
+                const userData = userCred.providerData[0]
 
                 console.log(userData)
             }
@@ -12,6 +13,8 @@ export const getUserDetail = () => {
             else{
                 reject(new Error("User is not authencticated"))
             }
+
+            unsubscribe()
         })
     })
 }
