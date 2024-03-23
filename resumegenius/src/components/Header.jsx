@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useUser from "../hooks/useUser"
 import {Link} from "react-router-dom"
 import {Logo} from "../assets"
 import {AnimatePresence,motion} from "framer-motion"
 import { PuffLoader } from 'react-spinners'
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 const Header = () => {
     const {data, isLoading, isError} = useUser();
+    const [isMenu,setIsMenu] = useState(false)
   return (
     <header className='w-full flex items-center justify-between px-4 py-3 lg:px-8 border-b border-gray-300 bg-bgPrimary z-50 gap-12 sticky top-0'> 
 
@@ -35,7 +37,7 @@ const Header = () => {
          (<React.Fragment>
 
           {data ? 
-            (<motion.div className='relative'>
+            (<motion.div className='relative cursor-pointer' onClick={() => setIsMenu(!isMenu)}>
               
               {data?.photoURL ? 
               
@@ -54,31 +56,72 @@ const Header = () => {
               )}
 
               {/* dropdown menu */}
-              <AnimatePresence>
+          <AnimatePresence>
               
-              <motion.div className='absolute px-4 py-3 rounded-md bg-white right-0 top-10 flex flex-col items-center justify-start gap-3 w-64 pt-12'>
+                {isMenu && 
+                <motion.div 
+                initial={{opacity:0,y:20}}
+                animate={{opacity:1,y:0}}
+                exit={{opacity:0,y:20}}
+                className='absolute px-4 py-3 rounded-md bg-white right-0 top-10 flex flex-col items-center justify-start gap-3 w-64 pt-12' onMouseLeave={() => setIsMenu(false)}>
                 
-              {data?.photoURL ? 
-              
-              (<div className='w-12 h-12 rounded-md relative flex items-center justify-center'>
-                  <img src={data?.photoURL} 
-                  className='w-full h-full object-cover rounded-md'
-                  referrerPolicy="no-referrer"
-                   alt="" 
-                   />
-              </div>) : 
-              
-              (<div className='w-12 h-12 rounded-md cursor-pointer relative flex items-center justify-center bg-blue-700 shadow-md'>
+                {data?.photoURL ? 
+                
+                (
+                
+                <div className='w-20 h-20 rounded-full relative flex items-center justify-center'>
+                    <img src={data?.photoURL} 
+                    className='w-full h-full object-cover rounded-md'
+                    referrerPolicy="no-referrer"
+                     alt="" 
+                     />
+  
+                    
+                </div>
+                
+                ) : 
+                
+                (
+                
+                <div className='w-20 h-20 rounded-full cursor-pointer relative flex items-center justify-center bg-blue-700 shadow-md'>
                   <p className='text-lg text-white'>{data?.email[0]}</p>
-              </div>
-              
-              )}
+                </div>
+                
+                )}
+  
+                {data?.displayName && (
+                  <p className='text-lg text-black'>
+                    {data?.displayName}
+                  </p>
+                )} 
+  
+                
+                    <div className='w-full flex-col items-start flex gap-8 pt-6'>
+  
+                    <Link className='text-txtLight hover:text-txtDark text-base whitespace-nowrap' to={"/profile"}>
+                      My Account
+                    </Link>
+  
+                    <Link className='text-txtLight hover:text-txtDark text-base whitespace-nowrap' to={"/template/create"}>
+                      Add New Template
+                    </Link>
+  
+                    <div className='w-full px-2 py-2 border-t border-gray-300 flex items-center justify-between group cursor-pointer'>
+                      <p>SignOut</p>
+                      
+                      <RiLogoutCircleLine className='group-hover:text-txtDark text-txtLight'/>
+  
+                    </div>
+                  
+                  </div>
+  
+                </motion.div>}
 
-              </motion.div>
+          </AnimatePresence>
               
-              </AnimatePresence>
-              
-            </motion.div> ):
+            </motion.div> 
+            
+            ):
 
             (<Link to={"/auth"}>
               <motion.button>Login</motion.button>
