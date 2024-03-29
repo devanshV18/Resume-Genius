@@ -21,9 +21,9 @@ const CreateTemplate = () => {
         setformData((prevRec) => ({...prevRec, [name]: value}))
     }
 
-    // const handleFileSelect = async (e) => {
-    //     const file = e.target.files[0]
-    // }
+    const handleFileSelect = async (e) => {
+        const file = e.target.files[0]
+    }
 
    
 
@@ -68,25 +68,39 @@ const CreateTemplate = () => {
             
             <div className='w-full bg-gray-300 backdrop-blur-md h-[420px lg;h-[620px] 2xl:h-[740px] rounded-md border-2 border-dotted border-gray-100 cursor-pointer flex items-center justify-center'>
               
-              {/* {imageAsset.isImageLoading ? (
-                
-                <div className='flex flex-col items-center justify-center gap-4'>
-                  <PuffLoader color='#498FCD' size={40}/>
-                  <p>{imageAsset?.progress.toFixed(2)}%</p>
-                </div>
-                
-              ):(
-                
-              // <React.Fragment>
-              //   {!imageAsset?.uri ? (
-                  
-              //   ): (
+            {imageAsset.isImageLoading ? (
+                <React.Fragment>
+                  <div className='flex flex-col items-center justify-center gap-4'>
+                    <PuffLoader color='#498FCD' size={40}/>
+                    <p>{imageAsset?.progress.toFixed(2)}%</p>
+                  </div>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  {!imageAsset?.uri ? (
+                    <React.Fragment>
+                      <label className='w-full cursor-pointer h-full'>
+                        <div className='flex flex-col items-center justify-center h-full w-full'>
+                          <div className='flex items-center justify-center cursor-pointer flex-col gap-4'>
+                            <FaUpload/>
+                            <p className='text-lg text-black'>Click to Upload</p>
+                          </div>
+                        </div>
+                        <input 
+                          type='file'
+                          className='w-0 h-0'
+                          accept='.jpeg,.png,.jpg'
+                          onChange={handleFileSelect}
+                        />
+                      </label>
+                    </React.Fragment>
+                  ) : (
+                    // Add your logic for when an image is already uploaded
+                    <React.Fragment></React.Fragment>
+                  )}
+                      </React.Fragment>
+                    )}
 
-              //   )}
-              // </React.Fragment>
-                
-                
-              )} */}
                   
             </div> 
 
