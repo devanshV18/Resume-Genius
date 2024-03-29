@@ -23,6 +23,13 @@ const CreateTemplate = () => {
 
     const handleFileSelect = async (e) => {
         const file = e.target.files[0]
+        setimageAsset((prev)  => ({...prev,isImageLoading:true}))
+
+
+    }
+
+    const isAllowed = (file) => {
+      const allowedTypes = [""]
     }
 
    
