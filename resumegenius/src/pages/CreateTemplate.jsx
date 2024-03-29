@@ -2,6 +2,9 @@ import React from 'react'
 import { useState } from 'react';
 import { PuffLoader } from 'react-spinners';
 import { FaUpload } from 'react-icons/fa6';
+import { toast } from 'react-toastify';
+import { ref, uploadBytesResumable } from 'firebase/storage'; 
+import { storage } from '../config/firebase.config';
 
 const CreateTemplate = () => {
 
@@ -25,11 +28,40 @@ const CreateTemplate = () => {
         const file = e.target.files[0]
         setimageAsset((prev)  => ({...prev,isImageLoading:true}))
 
+        if(file && isAllowed(file)){
+          const storageRef = ref(storage, `Templates/${Date.now()}-${file.name}`)
+          const uploadTask = uploadBytesResumable(storageRef, file)
+
+          uploadTask.on(
+            'state_changed', 
+            (snapshot)=> {
+              setimageAsset((prev) => ({
+              ...prev,
+              progress:(snapshot.bytesTransferred / snapshot.totalBytes) * 100 }
+              ))
+            }, 
+            (error)=> {
+              if(error.message.includes("storage/unauthorized")){
+                toast.error(`Error : Authentication revoked`)
+              }else{
+                toast.error(`Error : ${error.message}`)
+              }
+            },
+            ()=>{}
+          )
+          
+        }
+          
+        else{
+          toast.info("Invalid File Format")
+        }
 
     }
 
     const isAllowed = (file) => {
-      const allowedTypes = [""]
+      const allowedTypes = ["image/jpeg","image/jpg","image/png"]
+      //returning true if file type includes any of allowed types
+      return allowedTypes.includes(file.type) 
     }
 
    
