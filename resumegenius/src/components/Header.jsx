@@ -8,6 +8,7 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import { fadeInOutWithOpacity, slideUpDownMenu } from '../animations'
 import { useQueryClient } from 'react-query'
 import { auth } from '../config/firebase.config'
+import { adminIds } from '../utils/helpers'
 
 const Header = () => {
     const {data, isLoading, isError} = useUser();
@@ -115,9 +116,13 @@ const Header = () => {
                       My Account
                     </Link>
   
-                    <Link className='text-txtLight hover:text-txtDark text-base whitespace-nowrap' to={"/template/create"}>
-                      Add New Template
-                    </Link>
+                    {
+                      adminIds.includes(data?.uid) && (
+                        <Link className='text-txtLight hover:text-txtDark text-base whitespace-nowrap' to={"/template/create"}>
+                        Add New Template
+                      </Link>
+                      )
+                    }
   
                     <div className='w-full px-2 py-2 border-t border-gray-300 flex items-center justify-between group cursor-pointer' onClick={signOutUser}>
                       <p>SignOut</p>
