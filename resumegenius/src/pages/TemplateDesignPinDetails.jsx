@@ -9,4 +9,3 @@ const TemplateDesignPinDetails = () => {
 }
 
 export default TemplateDesignPinDetails
-tdpd
