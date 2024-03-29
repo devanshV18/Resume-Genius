@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { PuffLoader } from 'react-spinners';
 import { FaUpload } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
-import { ref, uploadBytesResumable } from 'firebase/storage'; 
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'; 
 import { storage } from '../config/firebase.config';
 
 const CreateTemplate = () => {
@@ -47,9 +47,25 @@ const CreateTemplate = () => {
                 toast.error(`Error : ${error.message}`)
               }
             },
-            ()=>{}
+            ()=>{
+              getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+                setimageAsset((prev) => ({
+                  ...prev,
+                  uri: downloadURL
+                }))
+              })
+
+              toast.success("Imager Uplaoded")
+              setInterval(() => {
+                setimageAsset((prevAsset) => (
+                  {
+                    ...prevAsset,
+                    isImageLoading:false,
+                  }
+                ))
+              },2000)
+            }
           )
-          
         }
           
         else{
