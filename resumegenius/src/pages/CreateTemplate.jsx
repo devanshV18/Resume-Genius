@@ -5,6 +5,7 @@ import { FaTrash, FaUpload } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'; 
 import { storage } from '../config/firebase.config';
+import { initialTags } from '../utils/helpers';
 
 const CreateTemplate = () => {
 
@@ -18,6 +19,8 @@ const CreateTemplate = () => {
       uri : null,
       progress: 0
     });
+
+    const [selectedTags, setselectedTags] = useState([]);
 
     const handleInputChange = (e) => {
         const {name,value} = e.target
@@ -77,17 +80,18 @@ const CreateTemplate = () => {
     //deleting from cloud 
     
     const deleteImage = async() => {
-          setimageAsset((prev) => ({...prev,isImageLoading: true}))
-          const deleteRef = ref(storage, imageAsset.uri)
-          deleteObject(deleteRef).then(()=>{
-          toast.success("Image Removed")
-          setInterval(() => {
+
+      const deleteRef = ref(storage, imageAsset.uri)
+      deleteObject(deleteRef).then(()=>{
+      toast.success("Image Removed")
+            setInterval(() => {
             setimageAsset((prev) => ({
               ...prev,progress:0,
               uri:null,
-              isImageLoading:false
-            }))
-          })
+              }))
+          },2000)
+
+          
       })
     }
 
@@ -95,6 +99,15 @@ const CreateTemplate = () => {
       const allowedTypes = ["image/jpeg","image/jpg","image/png"]
       //returning true if file type includes any of allowed types
       return allowedTypes.includes(file.type) 
+    }
+
+    const handleSelectedTags = (tag) => {
+      //check if the tag is selected or not
+      if(selectedTags.includes(tag)){
+        setselectedTags(selectedTags.filter(selected => selected !== tag))
+      }else{
+        setselectedTags([...selectedTags,tag])
+      }
     }
 
    
@@ -186,6 +199,15 @@ const CreateTemplate = () => {
 
                   
             </div> 
+
+            {/* <div className='w-full flex items-center flex-wrap gap-2'>
+              {initialTags.map((tag,i) => (
+                <div key={i} className={`border border-gray-300 px-2 py-1 roubnded-md cursor-pointer 
+                   ${selectedTags.includes(tag) ? "bg-blue-500 text-white":""}`} onClick={handleSelectedTags(tag)}>
+                  <p className='text-xs'>{tag}</p>
+                </div>
+              ))}
+            </div> */}
 
      </div>
 
