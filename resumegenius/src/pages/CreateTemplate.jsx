@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
 import { PuffLoader } from 'react-spinners';
-import { FaUpload } from 'react-icons/fa6';
+import { FaTrash, FaUpload } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'; 
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'; 
 import { storage } from '../config/firebase.config';
 
 const CreateTemplate = () => {
@@ -72,6 +72,23 @@ const CreateTemplate = () => {
           toast.info("Invalid File Format")
         }
 
+    }
+
+    //deleting from cloud 
+    
+    const deleteImage = async() => {
+          setimageAsset((prev) => ({...prev,isImageLoading: true}))
+          const deleteRef = ref(storage, imageAsset.uri)
+          deleteObject(deleteRef).then(()=>{
+          toast.success("Image Removed")
+          setInterval(() => {
+            setimageAsset((prev) => ({
+              ...prev,progress:0,
+              uri:null,
+              isImageLoading:false
+            }))
+          })
+      })
     }
 
     const isAllowed = (file) => {
@@ -151,7 +168,18 @@ const CreateTemplate = () => {
                     </React.Fragment>
                   ) : (
                     // Add your logic for when an image is already uploaded
-                    <React.Fragment></React.Fragment>
+                    <React.Fragment>
+                      <div className='relative w-full h-full overflow-hidden rounded-md'>
+                        <img src={imageAsset?.uri} 
+                        className='w-full h-full object-cover'
+                        loading='lazy'
+                        alt="" />
+                      </div>
+
+                      <div className='absolute top-4 right-4 w-8 h-8 rounded-md flex items-center justify-center bg-red-400 cursor-pointer' onClick={deleteImage}>
+                        <FaTrash className='text-sm text-white'/>
+                      </div>
+                    </React.Fragment>
                   )}
                       </React.Fragment>
                     )}
