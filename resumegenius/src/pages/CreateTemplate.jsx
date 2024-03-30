@@ -7,6 +7,9 @@ import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebas
 import { storage } from '../config/firebase.config';
 import { initialTags } from '../utils/helpers';
 import { serverTimestamp } from 'firebase/firestore';
+import useTemplates from '../hooks/useTemplates';
+
+
 
 const CreateTemplate = () => {
 
@@ -22,6 +25,10 @@ const CreateTemplate = () => {
     });
 
     const [selectedTags, setselectedTags] = useState([]);
+
+    // const {data: templates, isError: templatesError, isLoading: templatesIsLoading, refetch: templatesRefetch} = useTemplates()3
+
+    const {data: templates, isError: templatesError, isLoading: templatesIsLoading, refetch: templatesRefetch} = useTemplates()
 
     const handleInputChange = (e) => {
         const {name,value} = e.target
