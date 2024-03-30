@@ -102,11 +102,24 @@ const CreateTemplate = () => {
     }
 
     const handleSelectedTags = (tag) => {
-      //check if the tag is selected or not
-      if(selectedTags.includes(tag)){
-        setselectedTags(selectedTags.filter(selected => selected !== tag))
-      }else{
-        setselectedTags([...selectedTags,tag])
+      // Check if the tag is selected or not
+      if (selectedTags.includes(tag)) {
+        setselectedTags(selectedTags.filter((selected) => selected !== tag));
+      } else {
+        setselectedTags([...selectedTags, tag]);
+      }
+    };
+
+    const pushToCloud = async() => {
+      const timestamp = serverTimestamp()
+      const id = `${Date.now()}`
+      const _doc = {
+        _id: id,
+        title: formData.title,
+        imageURL: imageAsset.uri,
+        tags: selectedTags,
+        name: "Template1",
+        timestamp: timestamp,
       }
     }
 
@@ -202,17 +215,28 @@ const CreateTemplate = () => {
                   
         </div> 
 
-        <div>
+        
           <div className='w-full flex items-center flex-wrap gap-2'>
             {initialTags.map((tag,i)=>(
               <div key={i} 
               className={`border border-gray-300 px-2 py-1 rounded-md cursor-pointer ${selectedTags.includes(tag)?"bg-blue-500 text-white":""}`}
-              onClick={handleSelectedTags}>
+              onClick={() => handleSelectedTags(tag)}>
                 <p className='text-xl'>{tag}</p>
               </div>
             ))}
           </div>
-        </div>
+
+          
+          {/* action button */}
+
+          <button type='button' 
+          className='w-full text-white rounded-md py-3'
+          onClick={pushToCloud}
+          >
+
+            Save
+          </button>
+        
 
   </div>
 
