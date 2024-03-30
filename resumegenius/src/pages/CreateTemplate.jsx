@@ -117,49 +117,51 @@ const CreateTemplate = () => {
     
     
     
-    <div className='w-full px-4 lg:px-10 2xl:px-32 py-4 grid grid-cols-1 lg:grid-cols-12'>
+  <div className='w-full px-4 lg:px-10 2xl:px-32 py-4 grid grid-cols-1 lg:grid-cols-12'>
+        
         {/* LEFT conatiner */}
       
-            <div className='col-span-12 lg:col-span-4 2xl:col-span-3 w-full flex-1 flex items-center justify-start flex-col gap-4 px-2'>
+    <div className='col-span-12 lg:col-span-4 2xl:col-span-3 w-full flex-1 flex items-center justify-start flex-col gap-4 px-2'>
 
-              <p className='text-2xl   text-black'>Create a new Template</p>  
+      <p className='text-2xl   text-black'>Create a new Template</p>  
 
-              {/* DUMMY RECORD FOR TEMPLATE ID */}
-              <div className='w-full flex items-center justify-end'>
-                
-                <p className='text-base text-gray=400 uppercase font-semibold'>
-                  TempID : {""}
-                </p>
+      {/* DUMMY RECORD FOR TEMPLATE ID */}
+      <div className='w-full flex items-center justify-end'>
+        
+        <p className='text-base text-gray=400 uppercase font-semibold'>
+          TempID : {""}
+        </p>
 
-                <p className='text-sm text-black capitalize font-bold'>
-                  Template1
-                </p>
+        <p className='text-sm text-black capitalize font-bold'>
+          Template1
+        </p>
+
+      </div>
+
+        {/* template title section */}
+
+      <input
+         className='w-full px-4 py-3 rounded-md bg-transparent border border-gray-300 text-lg text-gray-200 focus:text-black focus:shadow-md outline-none`'
+          type='text'
+          name='title'
+          placeholder='Template title'
+          value={formData.title}
+          onChange={handleInputChange}
+          />
+      
               
-              </div>
-
-              {/* template title section */}
-
-              <input
-                className='w-full px-4 py-3 rounded-md bg-transparent border border-gray-300 text-lg text-gray-200 focus:text-black focus:shadow-md outline-none`'
-                type='text'
-                name='title'
-                placeholder='Template title'
-                value={formData.title}
-                onChange={handleInputChange}
-              />
-
-              
-              {/* FILE UPLOADER SECTION */}
+          {/* FILE UPLOADER SECTION */}
             
-            <div className='w-full bg-gray-300 backdrop-blur-md h-[420px lg;h-[620px] 2xl:h-[740px] rounded-md border-2 border-dotted border-gray-100 cursor-pointer flex items-center justify-center'>
+        <div className='w-full bg-gray-300 backdrop-blur-md h-[420px lg;h-[620px] 2xl:h-[740px] rounded-md border-2 border-dotted border-gray-100 cursor-pointer flex items-center justify-center'>
               
-            {imageAsset.isImageLoading ? (
-                <React.Fragment>
-                  <div className='flex flex-col items-center justify-center gap-4'>
-                    <PuffLoader color='#498FCD' size={40}/>
-                    <p>{imageAsset?.progress.toFixed(2)}%</p>
-                  </div>
-                </React.Fragment>
+          {imageAsset.isImageLoading ? (
+            <React.Fragment>
+              <div className='flex flex-col items-center justify-center gap-4'>
+                 <PuffLoader color='#498FCD' size={40}/>
+                <p>{imageAsset?.progress.toFixed(2)}%</p>
+              </div>
+            </React.Fragment>
+                
               ) : (
                 <React.Fragment>
                   {!imageAsset?.uri ? (
@@ -178,44 +180,46 @@ const CreateTemplate = () => {
                           onChange={handleFileSelect}
                         />
                       </label>
-                    </React.Fragment>
-                  ) : (
-                    // Add your logic for when an image is already uploaded
-                    <React.Fragment>
-                      <div className='relative w-full h-full overflow-hidden rounded-md'>
-                        <img src={imageAsset?.uri} 
-                        className='w-full h-full object-cover'
-                        loading='lazy'
-                        alt="" />
-                      </div>
+                      </React.Fragment>
+                    ) : (
+                      // Add your logic for when an image is already uploaded
+                      <React.Fragment>
+                        <div className='relative w-full h-full overflow-hidden rounded-md'>
+                          <img src={imageAsset?.uri} 
+                          className='w-full h-full object-cover'
+                          loading='lazy'
+                          alt="" />
+                        </div>
 
-                      <div className='absolute top-4 right-4 w-8 h-8 rounded-md flex items-center justify-center bg-red-400 cursor-pointer' onClick={deleteImage}>
-                        <FaTrash className='text-sm text-white'/>
-                      </div>
-                    </React.Fragment>
-                  )}
+                        <div className='absolute top-4 right-4 w-8 h-8 rounded-md flex items-center justify-center bg-red-400 cursor-pointer' onClick={deleteImage}>
+                          <FaTrash className='text-sm text-white'/>
+                        </div>
                       </React.Fragment>
                     )}
+                        </React.Fragment>
+                      )}
 
                   
-            </div> 
+        </div> 
 
-            {/* <div className='w-full flex items-center flex-wrap gap-2'>
-              {initialTags.map((tag,i) => (
-                <div key={i} className={`border border-gray-300 px-2 py-1 roubnded-md cursor-pointer 
-                   ${selectedTags.includes(tag) ? "bg-blue-500 text-white":""}`} onClick={handleSelectedTags(tag)}>
-                  <p className='text-xs'>{tag}</p>
-                </div>
-              ))}
-            </div> */}
+           <div className='w-full flex items-center flex-wrap gap-2'>
+            {initialTags.map((tag,i)=>(
+              <div key={i} 
+              className={`border border-gray-300 px-2 py-1 rounded-md cursor-pointer ${selectedTags.includes(tag)?"bg-blue-500 text-white":""}`}
+              onClick={handleSelectedTags}>
+                <p className='text-xs'>{tag}</p>
+              </div>
+            ))}
+           </div>
 
-     </div>
+        </div>
 
 
       {/* RIGHT CONTAINER */}
-      <div className='col-span-12 lg:col-span-8 2xl:col-span-9 bg-red-200'>
-        2  
-      </div>
+            <div className='col-span-12 lg:col-span-8 2xl:col-span-9 bg-red-200'>
+              2  
+            </div>
+    
     </div>
   )
 }
