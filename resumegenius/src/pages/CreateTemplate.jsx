@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'; 
 import { storage } from '../config/firebase.config';
 import { initialTags } from '../utils/helpers';
+import { serverTimestamp } from 'firebase/firestore';
 
 const CreateTemplate = () => {
 
@@ -118,8 +119,8 @@ const CreateTemplate = () => {
         title: formData.title,
         imageURL: imageAsset.uri,
         tags: selectedTags,
-        name: "Template1",
-        timestamp: timestamp,
+        name: 'Template1',
+        timestamp: timestamp
       }
     }
 
