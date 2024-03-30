@@ -152,7 +152,7 @@ const CreateTemplate = () => {
               
           {/* FILE UPLOADER SECTION */}
             
-        <div className='w-full bg-gray-300 backdrop-blur-md h-[420px lg;h-[620px] 2xl:h-[740px] rounded-md border-2 border-dotted border-gray-100 cursor-pointer flex items-center justify-center'>
+        <div className='w-full bg-gray-300 backdrop-blur-md h-[420px] lg:h-[620px] 2xl:h-[740px] rounded-md border-2 border-dotted border-gray-100 cursor-pointer flex items-center justify-center'>
               
           {imageAsset.isImageLoading ? (
             <React.Fragment>
@@ -202,17 +202,19 @@ const CreateTemplate = () => {
                   
         </div> 
 
-           <div className='w-full flex items-center flex-wrap gap-2'>
+        <div>
+          <div className='w-full flex items-center flex-wrap gap-2'>
             {initialTags.map((tag,i)=>(
               <div key={i} 
               className={`border border-gray-300 px-2 py-1 rounded-md cursor-pointer ${selectedTags.includes(tag)?"bg-blue-500 text-white":""}`}
               onClick={handleSelectedTags}>
-                <p className='text-xs'>{tag}</p>
+                <p className='text-xl'>{tag}</p>
               </div>
             ))}
-           </div>
-
+          </div>
         </div>
+
+  </div>
 
 
       {/* RIGHT CONTAINER */}
