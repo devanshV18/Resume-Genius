@@ -8,6 +8,9 @@ import { storage } from '../config/firebase.config';
 import { initialTags } from '../utils/helpers';
 import { serverTimestamp } from 'firebase/firestore';
 import useTemplates from '../hooks/useTemplates';
+import { db } from '../config/firebase.config';
+import { doc } from 'firebase/firestore';
+import { setDoc } from 'firebase/firestore';
 
 
 
@@ -126,9 +129,19 @@ const CreateTemplate = () => {
         title: formData.title,
         imageURL: imageAsset.uri,
         tags: selectedTags,
-        name: 'Template1',
+        name: templates && templates.length>0 ? `Templates${templates.length+1}`: "Template1",
         timestamp: timestamp
       }
+
+      await setDoc(doc(db,"templates",id),_doc).then(() => {
+        setformData((prevData) => ({...prevData,title:"",imageURL:""}))
+        setimageAsset((prevAsset) => ({...prevAsset, uri:null}))
+        setselectedTags([])
+        templatesRefetch()
+        toast.success("Data pushed to the cloud")
+      }).catch(error => {
+        toast.error(`Error: ${error.message}`);
+      })
     }
 
    
@@ -154,7 +167,7 @@ const CreateTemplate = () => {
         </p>
 
         <p className='text-sm text-black capitalize font-bold'>
-          Template1
+          {templates && templates.length>0 ? `Templates${templates.length+1}`: "Template1"}
         </p>
 
       </div>
@@ -238,7 +251,7 @@ const CreateTemplate = () => {
           {/* action button */}
 
           <button type='button' 
-          className='w-full text-white rounded-md py-3'
+          className='w-full bg-blue-500 text-white rounded-md py-3'
           onClick={pushToCloud}
           >
 
