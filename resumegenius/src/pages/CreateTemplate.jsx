@@ -2,11 +2,11 @@ import React from 'react'
 import { useState } from 'react';
 import { PuffLoader } from 'react-spinners';
 import { FaTrash, FaUpload } from 'react-icons/fa6';
-import { toast } from 'react-toastify';
+import { Zoom, toast } from 'react-toastify';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'; 
 import { storage } from '../config/firebase.config';
 import { initialTags } from '../utils/helpers';
-import { serverTimestamp } from 'firebase/firestore';
+import { deleteDoc, serverTimestamp } from 'firebase/firestore';
 import useTemplates from '../hooks/useTemplates';
 import { db } from '../config/firebase.config';
 import { doc } from 'firebase/firestore';
@@ -141,6 +141,18 @@ const CreateTemplate = () => {
         toast.success("Data pushed to the cloud")
       }).catch(error => {
         toast.error(`Error: ${error.message}`);
+      })
+    }
+
+    const removeTemplate = async() => {
+      const deleteRef = ref(storage, templates?.imageURL)
+      await deleteObject(deleteRef).then(async () => {
+        await deleteDoc(doc(db,"templates", templates?._id)).then(() => {
+          toast.success("Template deleted from the cloud")
+          templatesRefetch()
+        }).catch(err => {
+          toast.error(`Error : ${err.message}`)
+        })
       })
     }
 
@@ -282,6 +294,10 @@ const CreateTemplate = () => {
                             src={template?.imageURL} 
                             alt="" 
                             className='w-full h-full object-cover'/>
+
+                            <div className='absolute top-4 right-4 w-8 h-8 rounded-md flex items-center justify-center bg-red-400 cursor-pointer' onClick={() => removeTemplate(templates)}>
+                              <FaTrash className='text-sm text-white'/>
+                            </div>
                           </div>
                         ))}
                     </div>
