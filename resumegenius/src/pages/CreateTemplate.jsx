@@ -144,10 +144,10 @@ const CreateTemplate = () => {
       })
     }
 
-    const removeTemplate = async() => {
-      const deleteRef = ref(storage, templates?.imageURL)
+    const removeTemplate = async(template) => {
+      const deleteRef = ref(storage, template?.imageURL)
       await deleteObject(deleteRef).then(async () => {
-        await deleteDoc(doc(db,"templates", templates?._id)).then(() => {
+        await deleteDoc(doc(db,"templates", template?._id)).then(() => {
           toast.success("Template deleted from the cloud")
           templatesRefetch()
         }).catch(err => {
@@ -295,7 +295,7 @@ const CreateTemplate = () => {
                             alt="" 
                             className='w-full h-full object-cover'/>
 
-                            <div className='absolute top-4 right-4 w-8 h-8 rounded-md flex items-center justify-center bg-red-400 cursor-pointer' onClick={() => removeTemplate(templates)}>
+                            <div className='absolute top-4 right-4 w-8 h-8 rounded-md flex items-center justify-center bg-red-400 cursor-pointer' onClick={() => removeTemplate(template)}>
                               <FaTrash className='text-sm text-white'/>
                             </div>
                           </div>
