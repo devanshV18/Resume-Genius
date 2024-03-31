@@ -11,3 +11,9 @@ export const fadeInOutWithOpacity = {
     animate:{opacity:1},
     exit:{opacity:0}
 }
+
+export const slideDownWithScale = {
+    initial :{opacity:0, scale:0.6, y:20},
+    animate :{opacity:1, scale:1, y:0},
+    exit: {opacity:0, scale:0.6, y:20}
+}
