@@ -240,7 +240,7 @@ const CreateTemplate = () => {
           <div className='w-full flex items-center flex-wrap gap-2'>
             {initialTags.map((tag,i)=>(
               <div key={i} 
-              className={`border border-gray-300 px-2 py-1 rounded-md cursor-pointer ${selectedTags.includes(tag)?"bg-blue-500 text-white":""}`}
+              className={`border border-black px-2 py-1 rounded-md cursor-pointer ${selectedTags.includes(tag)?"bg-blue-500 text-white":""}`}
               onClick={() => handleSelectedTags(tag)}>
                 <p className='text-xl'>{tag}</p>
               </div>
@@ -263,8 +263,39 @@ const CreateTemplate = () => {
 
 
       {/* RIGHT CONTAINER */}
-            <div className='col-span-12 lg:col-span-8 2xl:col-span-9 bg-red-200'>
-              2  
+            <div className='col-span-12 lg:col-span-8 2xl:col-span-9 px-2 w-full flex-1 py-4'>
+              {templatesIsLoading ? (
+                <React.Fragment>
+                  <div className='w-full h-full flex items-center justify-center'>
+                    <PuffLoader color='#498FCD' size={40}/>
+                  </div>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  {templates && templates.length>0 ? 
+                  (
+                  <React.Fragment>
+                    <div className='w-full h-full grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-4'>
+                        {templates?.map((template) => (
+                          <div key={template._id} className='w-full h-[500px] rounded-md overflow-hidden relative'>
+                            <img 
+                            src={template?.imageURL} 
+                            alt="" 
+                            className='w-full h-full object-cover'/>
+                          </div>
+                        ))}
+                    </div>
+                  </React.Fragment> 
+                  ):(
+                    <React.Fragment>
+                      <div className='w-full h-full flex flex-col gap-6 items-center justify-center'>
+                        <PuffLoader color='#498FCD' size={40}/>
+                        <p className='text-xl tracking-wider capitalize text-black'>No Data</p>
+                      </div>
+                    </React.Fragment>
+                  )}
+                </React.Fragment>
+              )}
             </div>
     
     </div>
