@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { PuffLoader } from 'react-spinners';
 import { FaTrash, FaUpload } from 'react-icons/fa6';
@@ -11,6 +11,8 @@ import useTemplates from '../hooks/useTemplates';
 import { db } from '../config/firebase.config';
 import { doc } from 'firebase/firestore';
 import { setDoc } from 'firebase/firestore';
+import useUser from '../hooks/useUser';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -32,6 +34,10 @@ const CreateTemplate = () => {
     // const {data: templates, isError: templatesError, isLoading: templatesIsLoading, refetch: templatesRefetch} = useTemplates()3
 
     const {data: templates, isError: templatesError, isLoading: templatesIsLoading, refetch: templatesRefetch} = useTemplates()
+
+    const {data: user, isLoading} = useUser()
+
+    const navigate = useNavigate()
 
     const handleInputChange = (e) => {
         const {name,value} = e.target
@@ -155,6 +161,12 @@ const CreateTemplate = () => {
         })
       })
     }
+
+    useEffect(()=>{
+      if(!isLoading && !adminIds.includes(user?.uid)){
+        navigate("/",{replace:true})
+      }
+    },[user, isLoading])
 
    
 
