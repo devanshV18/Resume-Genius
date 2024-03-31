@@ -275,7 +275,7 @@ const CreateTemplate = () => {
                   {templates && templates.length>0 ? 
                   (
                   <React.Fragment>
-                    <div className='w-full h-full grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-4'>
+                    <div className='w-full h-full grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-4'>
                         {templates?.map((template) => (
                           <div key={template._id} className='w-full h-[500px] rounded-md overflow-hidden relative'>
                             <img 
@@ -289,7 +289,7 @@ const CreateTemplate = () => {
                   ):(
                     <React.Fragment>
                       <div className='w-full h-full flex flex-col gap-6 items-center justify-center'>
-                        <PuffLoader color='#498FCD' size={40}/>
+                        {/* <PuffLoader color='#498FCD' size={40}/> */}
                         <p className='text-xl tracking-wider capitalize text-black'>No Data</p>
                       </div>
                     </React.Fragment>
