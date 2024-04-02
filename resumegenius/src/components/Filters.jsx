@@ -18,14 +18,14 @@ const Filters = () => {
         // const updatedState = {...previousState, filter: value} 
         // queryClient.setQueryData("globalFilter", updatedState)
 
-        queryClient.setQueryData("globalFIlter", {
+        queryClient.setQueryData("globalFilter", {
             ...queryClient.getQueryData("globalFilter"),
             searchTerm: value,
         })
     }
 
     const clearFilter = () => {
-        queryClient.setQueryData("globalFIlter", {
+        queryClient.setQueryData("globalFilter", {
           ...queryClient.getQueryData("globalFilter"),
           searchTerm: "",
         })
@@ -54,7 +54,7 @@ const Filters = () => {
         </div>
 
         <div className='w-full flex items-center justify-start overflow-x-scroll gap-6 scrollbar-none'>
-            {FiltersData.map((item) => (
+            {FiltersData && FiltersData.map((item) => (
                 <div
                 onClick={() => handleFilterValue(item.value)}
                 key={item.id}
