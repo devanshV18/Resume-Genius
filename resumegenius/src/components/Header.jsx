@@ -16,7 +16,7 @@ const Header = () => {
     const [isMenu,setIsMenu] = useState(false)
 
     const queryClient = useQueryClient()
-    const {data: filterData,} = useFilters()
+    const {data: filterData} = useFilters()
 
 
     const signOutUser = async() => {
@@ -26,14 +26,14 @@ const Header = () => {
     }
 
     const handleSearchTerm = (e) => {
-      queryClient.setQueryData("globalFIlter", {
+      queryClient.setQueryData("globalFilter", {
         ...queryClient.getQueryData("globalFilter"),
         searchTerm: e.target.value,
       })
     }
 
     const clearFilter = () => {
-      queryClient.setQueryData("globalFIlter", {
+      queryClient.setQueryData("globalFilter", {
         ...queryClient.getQueryData("globalFilter"),
         searchTerm: "",
       })
@@ -54,23 +54,26 @@ const Header = () => {
       {/* input */}
 
       <div className='flex-1 border border-black px-4 pt-1 rounded-b-md flex items-center justify-between bg-indigo-200'>
-        <input type="text" 
-        placeholder='Search here...' 
-        className='flex-1 h-10 bg-transparent text-2xl text-black outline-none border-none'
-        onChange={handleSearchTerm}
-        value={filterData.searchTerm ? filterData.searchTerm : ""}
+        <input
+          type="text"
+          placeholder="Search here..."
+          className="flex-1 h-10 bg-transparent text-2xl text-black outline-none border-none"
+          onChange={handleSearchTerm}
+          value={filterData?.searchTerm || ""}
         />
 
-        <AnimatePresence>
-          {filterData.searchTerm.length > 0 && (
-             <motion.div 
-             onClick={clearFilter}
-             {...fadeInOutWithOpacity} 
-             className='w-8 h-8 flex items-center justify-center cursor-pointer active:scale-95 duration-150'>
-               <p className='text-2xl text-white '>X</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+
+          <AnimatePresence>
+            {filterData?.searchTerm && filterData.searchTerm.length > 0 && (
+              <motion.div
+                onClick={clearFilter}
+                {...fadeInOutWithOpacity}
+                className="w-8 h-8 flex items-center justify-center cursor-pointer active:scale-95 duration-150"
+              >
+                <p className="text-2xl text-white">X</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
       </div>
 
 
