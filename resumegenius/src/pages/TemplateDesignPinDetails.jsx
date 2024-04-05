@@ -131,8 +131,41 @@ const TemplateDesignPinDetails = () => {
           </div>
         </div>
 
-        <div className='col-span-1 lg:col-span-4'>
-          2
+        <div className='col-span-1 lg:col-span-4 w-full flex flex-col items-center justify-start px-3 gap-6'>
+          <div className='w-full h-72 bg-indigo-400 rounded-md overflow-hidden relative' 
+            style={{
+              background:"https://cdn.iconscout.com/icon/free/png-256/free-react-1-282599.png?f=webp",
+              backgroundPosition: "center",
+              backgroundSize: "cover"
+              }}
+            >
+
+            <div className='absolute inset-0 flex items-center justify-center bg-[rgba(0,0,0,4'>
+              <Link to={"/"} className='px-4 py-2 rounded-md border-2border-gray-50 text-black'>
+                Discover More
+              </Link>
+            </div>
+
+          </div>
+
+            
+            {user && (
+              <Link 
+              className='w-full px-4 py-3 rounded-md flex items-center justify-center bg-indigo-400 cursor-pointer'
+              to={`/resume/${data?.name}$templateId=${templateID}`}>
+                <p className='text-black font-bold text-xl'>Edit This Template</p>
+              </Link>
+            )}
+
+            <div className='w-full flex items-center justify-center flex-wrap gap-2'>
+              {data?.tags?.map((tag,index) => (
+                <p 
+                key={index}
+                className='text-2xl border bg-black text-white px-2 py-1 rounded-md whitespace-nowrap'>
+                  {tag}
+                </p>
+              ))}
+            </div>
         </div>
 
       </div>
