@@ -20,7 +20,7 @@ const TemplateDesignPinDetails = () => {
 
   const {data:user, refetch:userRefetch} = useUser()
 
-  const {data: template, refetch: temp_refetch, isLoading: temp_isLoading} = useTemplates()
+  const {data: templates, refetch: temp_refetch, isLoading: temp_isLoading} = useTemplates()
 
   const addToCollection = async (e) => {
     e.stopPropagation()
@@ -169,6 +169,12 @@ const TemplateDesignPinDetails = () => {
         </div>
 
       </div>
+
+      {templates?.length>0 && (
+        <div className='w-full py-8 flex flex-col items-start justify-start gap-4'>
+          <p>You might also like</p>
+        </div>
+      )}
     </div>
   )
 }
