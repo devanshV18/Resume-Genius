@@ -8,6 +8,8 @@ import { BiFolderPlus, BiHeart, BiSolidFolderPlus, BiSolidHeart } from 'react-ic
 import useUser from '../hooks/useUser'
 import { saveToCollections, saveToFavourites} from '../api'
 import useTemplates from '../hooks/useTemplates'
+import {AnimatePresence} from "framer-motion"
+import {TemplateDesignPin} from '../components'
 
 
 const TemplateDesignPinDetails = () => {
@@ -170,9 +172,20 @@ const TemplateDesignPinDetails = () => {
 
       </div>
 
-      {templates?.length>0 && (
+      {templates?.filter((temp) => temp._id !== data?._id)?.length>0 && (
         <div className='w-full py-8 flex flex-col items-start justify-start gap-4'>
-          <p>You might also like</p>
+          <p text-lg font-semibold text-black>You might also like</p>
+
+          <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2'>
+            <React.Fragment>
+              <AnimatePresence>
+                {templates && templates?.filter((temp) => temp._id !== data?._id).map((template, index) => (
+                  <TemplateDesignPin key={template?._id} data={template} index={index}/>
+                ))}
+              </AnimatePresence>
+            </React.Fragment>
+  
+          </div>
         </div>
       )}
     </div>
