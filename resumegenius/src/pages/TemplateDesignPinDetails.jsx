@@ -1,8 +1,10 @@
 import React from 'react'
-import {useParams} from "react-router-dom"
+import {useParams, Link} from "react-router-dom"
 import {useQuery} from "react-query"
 import { getTemplateDetails } from '../api'
 import { MainSpinner } from '../components'
+import { FaHouse } from 'react-icons/fa6'
+
 
 const TemplateDesignPinDetails = () => {
   const {templateID} = useParams()
@@ -24,7 +26,11 @@ const TemplateDesignPinDetails = () => {
 
   return (
     <div className='w-full flex flex-col items-center justify-start px-4 py-12'>
-      Template
+      <div className='w-full flex items-center gap-2'>
+        <Link to={"/"}>
+          <FaHouse/> Home
+        </Link>
+      </div>
     </div>
   )
 }
