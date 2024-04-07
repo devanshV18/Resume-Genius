@@ -188,11 +188,11 @@ const CreateTemplate = () => {
       <div className='w-full flex items-center justify-end'>
         
         <p className='text-base text-gray=400 uppercase font-semibold'>
-          TempID : {""}
+          TEMPID : {""}
         </p>
 
         <p className='text-sm text-black capitalize font-bold'>
-          {templates && templates.length>0 ? `Templates${templates.length+1}`: "Template1"}
+          {templates && templates.length>0 ? `Template${templates.length+1}`: "Template1"}
         </p>
 
       </div>

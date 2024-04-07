@@ -149,7 +149,7 @@ const Header = () => {
                     </Link>
   
                     {
-                      adminIds.includes(data?.uid) && (
+                      data?.uid && adminIds.includes(data?.uid) && (
                         <Link className='text-txtLight hover:text-txtDark text-base whitespace-nowrap' to={"/template/create"}>
                         Add New Template
                       </Link>

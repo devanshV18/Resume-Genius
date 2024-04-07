@@ -1,6 +1,7 @@
-import { Template1, Template2 } from "../components/designs";
+import { Template1 } from "../components/designs";
+import { Template2 } from "../components/designs";
 
-export const adminIds = ["116066160874334281494", "25000924"];
+export const adminIds = ["100960657191573932004", "111777599058332046960"];
 
 export const initialTags = [
   "Software Engineer",
@@ -57,6 +58,6 @@ export const FiltersData = [
 ];
 
 export const TemplatesData = [
-  { id: `template-${Date.now()}`, name: "Template1", component: Template1 },
-  { id: `template-${Date.now()}`, name: "Template2", component: Template2 },
-];
+  {id: `template-${Date.now()}`, name: "Template1", component: Template1},
+  {id: `template-${Date.now()}`, name: "Template2", component: Template2}
+]
