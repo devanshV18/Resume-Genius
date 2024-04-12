@@ -27,7 +27,7 @@ export const scaleInOut = (index) => {
     }
 }
 
-export const opacityINOut = (index) => {
+export const opacityInOut = (index) => {
     return {
       initial: { opacity: 0, y: 20 },
       animate: { opacity: 1, y: 0 },
