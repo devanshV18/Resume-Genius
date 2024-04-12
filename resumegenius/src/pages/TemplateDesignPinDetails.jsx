@@ -43,7 +43,7 @@ const TemplateDesignPinDetails = () => {
   if(isError){
     return (
       <div className='w-full h-[60vh] flex flex-col items-center justify-center'>
-        <p className='text-lg text-black'>Error While fetching data. Please try Again</p>
+        <p>Error While fetching data. Please try Again</p>
       </div>
     )
   }
@@ -76,7 +76,7 @@ const TemplateDesignPinDetails = () => {
 
               {data?.favourites?.length>0 && (
                <div className='flex items-center justify-center gap-1'>
-                <BiSolidHeart className='text-lg text-red-500'/>
+                <BiSolidHeart className="text-lg text-red-500"/>
                 <p className='text-black font-semibold'>{data?.favourites?.length} Likes</p>
                </div>
               )}
@@ -91,7 +91,7 @@ const TemplateDesignPinDetails = () => {
                       onClick={addToCollection}
                       className='flex items-center justify-center px-4 py-2 rounded-md border border-indigo-200 gap-2 hover:bg-indigo-400 cursor-pointer'>
                         <BiSolidFolderPlus className='text-base text-black'/>
-                        <p className='text-lg text-black whitespace-nowrap'>Remove From Collections</p>
+                        <p className="text-lg text-black whitespace-nowrap">Remove From Collections</p>
                       </div>
                     </React.Fragment>
                     ) : (
@@ -100,7 +100,7 @@ const TemplateDesignPinDetails = () => {
                       onClick={addToCollection}
                       className='flex items-center justify-center px-4 py-2 rounded-md border border-indigo-200 gap-2 hover:bg-indigo-400 cursor-pointer'>
                         <BiFolderPlus className='text-base text-black'/>
-                        <p className='text-lg text-black whitespace-nowrap'>Add To Collections</p>
+                        <p className="text-lg text-black whitespace-nowrap'">Add To Collections</p>
                       </div>
                     </React.Fragment>
                     )
@@ -113,7 +113,7 @@ const TemplateDesignPinDetails = () => {
                       onClick={addToFavourites}
                       className='flex items-center justify-center px-4 py-2 rounded-md border border-indigo-200 gap-2 hover:bg-indigo-400 cursor-pointer'>
                         <BiSolidHeart className='text-base text-black'/>
-                        <p className='text-lg text-black whitespace-nowrap'>Remove From Favourites</p>
+                        <p className="text-lg text-black whitespace-nowrap">Remove From Favourites</p>
                       </div>
                     </React.Fragment>
                     ) : (
@@ -122,7 +122,7 @@ const TemplateDesignPinDetails = () => {
                       onClick={addToFavourites}
                       className='flex items-center justify-center px-4 py-2 rounded-md border border-indigo-200 gap-2 hover:bg-indigo-400 cursor-pointer'>
                         <BiHeart className='text-base text-black'/>
-                        <p className='text-lg text-black whitespace-nowrap'>Add To Favourites</p>
+                        <p className="text-lg text-black whitespace-nowrap">Add To Favourites</p>
                       </div>
                     </React.Fragment>
                     )
@@ -174,7 +174,7 @@ const TemplateDesignPinDetails = () => {
 
       {templates?.filter((temp) => temp._id !== data?._id)?.length>0 && (
         <div className='w-full py-8 flex flex-col items-start justify-start gap-4'>
-          <p text-lg font-semibold text-black>You might also like</p>
+          <p className='text-lg font-semibold text-black'>You might also like</p>
 
           <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2'>
             <React.Fragment>

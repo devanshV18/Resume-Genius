@@ -136,7 +136,7 @@ const CreateTemplate = () => {
         title: formData.title,
         imageURL: imageAsset.uri,
         tags: selectedTags,
-        name: templates && templates.length>0 ? `Templates${templates.length+1}`: "Template1",
+        name: templates && templates.length>0 ? `Template${templates.length+1}`: "Template1",
         timestamp: timestamp
       }
 

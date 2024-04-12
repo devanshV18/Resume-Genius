@@ -9,7 +9,7 @@ const CreateResume = () => {
         {TemplatesData.map(template => (
           <Route 
             key={template?.id} 
-            path={'/${template.name}'} 
+            path={`/${template.name}`} 
             Component={template.component}
           />
         ))}
