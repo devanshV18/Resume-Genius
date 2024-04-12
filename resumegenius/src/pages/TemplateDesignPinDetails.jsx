@@ -42,14 +42,14 @@ const TemplateDesignPinDetails = () => {
 
   if(isError){
     return (
-      <div className='w-full h-[60vh] flex flex-col items-center justify-center'>
+      <div className='w-full flex flex-col items-center justify-center'>
         <p>Error While fetching data. Please try Again</p>
       </div>
     )
   }
 
   return (
-    <div className='w-full flex flex-col items-center justify-start px-4 py-12'>
+    <div className='w-full h-[60vh] flex flex-col items-center justify-start px-4 py-12'>
       <div className='w-full flex items-center pb-8 gap-2'>
 
         <Link 
@@ -136,26 +136,26 @@ const TemplateDesignPinDetails = () => {
         <div className='col-span-1 lg:col-span-4 w-full flex flex-col items-center justify-start px-3 gap-6'>
           <div className='w-full h-72 bg-indigo-400 rounded-md overflow-hidden relative' 
             style={{
-              background:"https://cdn.iconscout.com/icon/free/png-256/free-react-1-282599.png?f=webp",
+              background:"url(https://cdn.pixabay.com/photo/2023/10/04/03/04/ai-generated-8292699_1280.jpg)",
               backgroundPosition: "center",
               backgroundSize: "cover"
               }}
             >
 
-            <div className='absolute inset-0 flex items-center justify-center bg-[rgba(0,0,0,4'>
-              <Link to={"/"} className='px-4 py-2 rounded-md border-2border-gray-50 text-black'>
+            <div className='absolute inset-0 flex items-center justify-center bg-[rgba(0,0,0,0.4)]'>
+              <Link to={"/"} 
+              className='px-4 py-2 rounded-md border-2border-gray-50 text-black'>
                 Discover More
               </Link>
             </div>
 
           </div>
 
-            
+            {/* localhost:3000/resume/professional/123 */}
             {user && (
-              <Link 
-              className='w-full px-4 py-3 rounded-md flex items-center justify-center bg-indigo-400 cursor-pointer'
-              to={`/resume/${data?.name}$templateId=${templateID}`}>
-                <p className='text-black font-bold text-xl'>Edit This Template</p>
+              <Link className='w-full px-4 py-3 rounded-md flex items-center justify-center bg-indigo-400 cursor-pointer' 
+              to={`/resume/${data?.name}?templateId=${data?._id}`}>
+                <p className='text-white font-semibold text-lg'>Edit this Template</p>
               </Link>
             )}
 
