@@ -35,7 +35,7 @@ export const getTemplates = () => {
     return new Promise((resolve,reject)=>{
         const templateQuery = query(
             collection(db,"templates"),
-            orderBy("timeStamp","asc")
+            orderBy("timestamp","asc")
         )
 
         const unsubscribe = onSnapshot(templateQuery,(querySnap) => {

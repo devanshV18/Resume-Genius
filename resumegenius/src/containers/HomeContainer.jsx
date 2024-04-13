@@ -45,7 +45,7 @@ const RenderATemplate = ({templates}) => {
       (
       <React.Fragment>
         <AnimatePresence>
-          {templates && templates.map((template, index) => (
+          {templates && templates?.map((template, index) => (
             <TemplateDesignPin key={template?._id} data={template} index={index}/>
           ))}
         </AnimatePresence>
